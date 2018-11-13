@@ -1,0 +1,19 @@
+name: cinder-purestorage
+summary: Cinder PureStorage backend
+maintainer: Michael Skalka <Michael.Skalka@mskalka>
+description: |
+
+tags:
+  - misc
+subordinate: true
+series:
+  - xenial
+  - bionic
+provides:
+  storage-backend:
+    interface: cinder-backend
+    scope: container
+requires:
+  container:
+    interface: juju-info
+    scope: container
