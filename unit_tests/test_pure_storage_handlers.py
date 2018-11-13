@@ -20,7 +20,7 @@ import unittest
 
 import mock
 
-import reactive.designate_bind_handlers as handlers
+import reactive.cinder_purestorage_handlers as handlers
 
 
 _when_args = {}
@@ -101,47 +101,23 @@ class TestCinderPureStorageHandlers(unittest.TestCase):
         # test that the hooks actually registered the relation expressions that
         # are meaningful for this interface: this is to handle regressions.
         # The keys are the function names that the hook attaches to.
+        when_any_patterns = {
+            'storage_backend': [
+                ('storage-backend.joined', 'storage-backend.changed')],
+        }
         when_patterns = {
-            'setup_sync_target_alone': [('installed', )],
-            'send_info': [
-                ('dns-backend.related', ),
-                ('rndckey.available', ),
-            ],
-            'config_changed': [
-                ('dns-backend.related', ),
-                ('rndckey.available', ),
-            ],
-            'update_zones_from_peer': [
-                ('cluster.connected', ),
-                ('sync.request.sent', ),
-            ],
-            'check_zone_status': [
-                ('cluster.connected', ),
-                ('installed', ),
-            ],
-            'process_sync_requests': [
-                ('cluster.connected', ),
-                ('zones.initialised', ),
-            ],
-            'assess_status': [('zones.initialised', )],
+            'update_config': [
+                ('config.changed', )],
         }
         when_not_patterns = {
             'install_packages': [('installed', )],
-            'setup_secret': [('rndckey.available', )],
-            'update_zones_from_peer': [('zones.initialised', )],
-            'setup_sync_target_alone': [
-                ('cluster.connected', ),
-                ('zones.initialised', ),
-                ('sync.request.sent', ),
-            ],
-            'check_zone_status': [
-                ('zones.initialised', ),
-                ('sync.request.sent', ),
-            ],
+            'storage_backend': [('storage-backend.available', )],
         }
         # check the when hooks are attached to the expected functions
-        for t, p in [(_when_args, when_patterns),
-                     (_when_not_args, when_not_patterns)]:
+        for t, p in [(_when_args, when_any_patterns),
+                     (_when_not_args, when_not_patterns),
+                     (_when_args, when_patterns),
+                     ]:
             for f, args in t.items():
                 # check that function is in patterns
                 print(f)

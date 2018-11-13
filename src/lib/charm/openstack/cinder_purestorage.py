@@ -49,18 +49,18 @@ class PureStorageSubordinateContext(OSContextGenerator):
             'iscsi': 'cinder.volume.drivers.pure.PureISCSIDriver',
             'fc': 'cinder.volume.drivers.pure.PureFCIDriver',
         }
-        service = charm_config['volume-backend-name'] or service_name()
+        service = config('volume-backend-name') or service_name()
 
         ctxt.append(('volume_backend_name', service))
         ctxt.append(('san_ip', config('san-ip')))
         ctxt.append(('pure_api_token', config('pure-api-token')))
         try:
             ctxt.append(
-                ('volume_driver', drivers[config('protocol').lower()]]))
+                ('volume_driver', drivers[config('protocol').lower()]))
         except KeyError:
-            raise ProtocolNotImplimented(config('protocol'),' is not an '
-                'implimented protocol  driver, please choose between '
-                '`iscsi` and `fc`.')
+            raise ProtocolNotImplimented(
+                config('protocol'), ' is not an implimented protocol  driver, '
+                'please choose between `iscsi` and `fc`.')
 
         for rid in relation_ids(self.interfaces[0]):
             log('Setting relation data for {}'.format(rid))
