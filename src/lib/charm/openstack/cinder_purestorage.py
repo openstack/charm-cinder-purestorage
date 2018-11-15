@@ -30,7 +30,7 @@ class PureStorageCharm(OpenStackCharm):
         else:
             relation_set(
                 relation_id=rel_id[0],
-                backend_name=config()['volume-backend-name'] or service_name(),
+                backend_name=config('volume-backend-name') or service_name(),
                 subordinate_configuration=json.dumps(
                     PureStorageSubordinateContext()()),
                 stateless=True,

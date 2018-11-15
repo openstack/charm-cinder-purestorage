@@ -9,3 +9,7 @@ options:
     type: string
     default: iscsi
     description: "SAN protocol to use. Choose between iscsi or fc."
+  volume-backend-name:
+    type: string
+    description: "Service name to present to Cinder"
+    default:
