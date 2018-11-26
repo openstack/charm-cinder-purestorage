@@ -1,2 +1,5 @@
 includes:
   - 'layer:openstack'
+  - 'interface:cinder-backend'
+
+repo: https://github.com/mskalka/charm-cinder-purestorage

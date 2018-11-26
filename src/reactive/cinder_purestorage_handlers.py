@@ -5,20 +5,22 @@ import charms.reactive as reactive
 import charm.openstack.cinder_purestorage as cinder_pure
 assert cinder_pure
 
-charm.use_defaults('charm.installed')
 
-
-@reactive.when_any('storage-backend.joined', 'storage-backend.changed')
-@reactive.when_not('storage-backend.available')
-def storage_backend():
+@reactive.when_any('install')
+def install_pure_driver():
     with charm.provide_charm_instance() as charm_class:
-        charm_class.set_relation_data()
-    reactive.set_state('storage-backend.available')
+        charm_class.install()
 
 
-@reactive.when('config.changed')
+@reactive.when('storage-backend.available')
+@reactive.when_not('cinder.configured')
+def storage_backend(principle):
+    with charm.provide_charm_instance() as charm_class:
+        name, config = charm_class.get_purestorage_config()
+        principle.configure_principal(name, config)
+    reactive.set_state('cinder.configured')
+
+
+@reactive.hook('config-changed')
 def update_config():
-    reactive.remove_state('storage-backend.available')
-    with charm.provide_charm_instance() as charm_class:
-        charm_class.set_relation_data()
-    reactive.set_state('storage-backend.available')
+    reactive.remove_state('cinder.configured')
