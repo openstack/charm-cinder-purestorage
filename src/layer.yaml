@@ -1,5 +1,8 @@
-includes:
-  - 'layer:openstack'
-  - 'interface:cinder-backend'
-
-repo: https://github.com/mskalka/charm-cinder-purestorage
+includes: ['layer:openstack', 'interface:cinder-backend']
+config:
+  deletes:
+      - debug
+      - verbose
+      - use-syslog
+      - use-internal-endpoints
+      - ssl_ca
