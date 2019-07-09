@@ -1,4 +1,7 @@
 .tox
+build
+layers
+interfaces
 .stestr
 *__pycache__*
 *.pyc
