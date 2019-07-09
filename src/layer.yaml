@@ -6,3 +6,4 @@ config:
       - use-syslog
       - use-internal-endpoints
       - ssl_ca
+repo: https://github.com/openstack-charmers/charm-cinder-purestorage

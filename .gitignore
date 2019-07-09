@@ -1,9 +1,9 @@
 .tox
-tmp
 build
 layers
 interfaces
-__pycache__
-.testrepository
 .stestr
-.pyc
+*__pycache__*
+*.pyc
+*.swp
+build
