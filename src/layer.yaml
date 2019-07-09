@@ -2,4 +2,4 @@ includes:
   - 'layer:openstack'
   - 'interface:cinder-backend'
 
-repo: https://github.com/mskalka/charm-cinder-purestorage
+repo: https://github.com/openstack-charmers/charm-cinder-purestorage
