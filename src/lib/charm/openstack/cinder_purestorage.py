@@ -3,6 +3,7 @@ import charmhelpers.core.hookenv as ch_hookenv # noqa
 
 charms_openstack.charm.use_defaults('charm.default-select-release')
 
+
 class CinderpurestorageCharm(
         charms_openstack.charm.CinderStoragePluginCharm):
 
@@ -13,8 +14,9 @@ class CinderpurestorageCharm(
     stateless = True
     # Specify any config that the user *must* set.
     mandatory_config = [
-            ('san_ip', self.config.get('san-ip')),
-            ('pure_api_token', self.config.get('pure-api-token'))]
+        ('san_ip', self.config.get('san-ip')),
+        ('pure_api_token', self.config.get('pure-api-token'))
+    ]
 
     def cinder_configuration(self):
         drivers = {
@@ -28,6 +30,7 @@ class CinderpurestorageCharm(
             ('volume_driver', drivers[self.config.get('protocol').lower()]),
             ('volume_backend_name', service)]
         return driver_options
+
 
 class CinderpurestorageCharmRocky(CinderpurestorageCharm):
 
