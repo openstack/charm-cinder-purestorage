@@ -1,26 +1,32 @@
-import charms_openstack.charm as charm
-import charms.reactive as reactive
+# Copyright 2019
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#  http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
+import charms_openstack.charm
+import charms.reactive
 
-import charm.openstack.cinder_purestorage as cinder_pure
-assert cinder_pure
+# This charm's library contains all of the handler code associated with
+# this charm -- we need to import it to get the definitions for the charm.
+import charm.openstack.cinder_purestorage  # noqa
 
+charms_openstack.charm.use_defaults(
+    'charm.installed',
+    'update-status',
+    'upgrade-charm',
+    'storage-backend.connected',
+)
 
-@reactive.when_any('install')
-def install_pure_driver():
-    with charm.provide_charm_instance() as charm_class:
-        charm_class.install()
-
-
-@reactive.when('storage-backend.available')
-@reactive.when_not('cinder.configured')
-def storage_backend(principle):
-    with charm.provide_charm_instance() as charm_class:
-        name, config = charm_class.get_purestorage_config()
-        principle.configure_principal(name, config)
-    reactive.set_state('cinder.configured')
-
-
-@reactive.hook('config-changed')
-def update_config():
-    reactive.remove_state('cinder.configured')
+@charms.reactive.when('config.changed.driver-source')
+def reinstall():
+    with charms_openstack.charm.provide_charm_instance() as charm:
+        charm.install()
