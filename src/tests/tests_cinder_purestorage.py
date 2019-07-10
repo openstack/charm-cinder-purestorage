@@ -23,6 +23,7 @@ import zaza.model
 import zaza.charm_tests.test_utils as test_utils
 import zaza.utilities.openstack as openstack_utils
 
+
 class CinderpurestorageTest(test_utils.OpenStackBaseTest):
     """Encapsulate purestorage tests."""
 
@@ -41,8 +42,11 @@ class CinderpurestorageTest(test_utils.OpenStackBaseTest):
             'cinder-purestorage': {
                 'san_ip': ['10.243.19.250'],
                 'pure_api_token': ['ac0a534f-b682-777a-45a4-15a02e0d5c7e'],
-                'volume_driver': ['cinder.volume.drivers.pure.PureISCSIDriver'],
-                'volume_backend_name': ['cinder-pure']}}
+                'volume_driver':
+                    ['cinder.volume.drivers.pure.PureISCSIDriver'],
+                'volume_backend_name': ['cinder-pure']
+            }
+        }
 
         zaza.model.run_on_leader(
             'cinder',
@@ -56,17 +60,16 @@ class CinderpurestorageTest(test_utils.OpenStackBaseTest):
             timeout=2)
 
     def test_create_volume(self):
-         test_vol_name = "zaza{}".format(uuid.uuid1().fields[0])
-         vol_new = self.cinder_client.volumes.create(
-             name=test_vol_name,
-             size=2)
-         openstack_utils.resource_reaches_status(
-             self.cinder_client.volumes,
-             vol_new.id,
-             expected_status='available')
-         test_vol = self.cinder_client.volumes.find(name=test_vol_name)
-         self.assertEqual(
-             getattr(test_vol, 'os-vol-host-attr:host').split('#')[0],
-             'cinder@cinder-purestorage')
-         self.cinder_client.volumes.delete(vol_new)
-
+        test_vol_name = "zaza{}".format(uuid.uuid1().fields[0])
+        vol_new = self.cinder_client.volumes.create(
+            name=test_vol_name,
+            size=2)
+        openstack_utils.resource_reaches_status(
+            self.cinder_client.volumes,
+            vol_new.id,
+            expected_status='available')
+        test_vol = self.cinder_client.volumes.find(name=test_vol_name)
+        self.assertEqual(
+            getattr(test_vol, 'os-vol-host-attr:host').split('#')[0],
+            'cinder@cinder-purestorage')
+        self.cinder_client.volumes.delete(vol_new)
