@@ -16,8 +16,10 @@ import charms_openstack.charm
 import charms.reactive
 
 # This charm's library contains all of the handler code associated with
-# this charm -- we need to import it to get the definitions for the charm.
-import charm.openstack.cinder_purestorage  # noqa
+# this charm -- we will use the auto-discovery feature of charms.openstack
+# to get the definitions for the charm.
+import charms_openstack.bus
+charms_openstack.bus.discover()
 
 charms_openstack.charm.use_defaults(
     'charm.installed',

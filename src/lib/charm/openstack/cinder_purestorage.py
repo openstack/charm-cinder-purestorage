@@ -1,5 +1,4 @@
 import charms_openstack.charm
-import charmhelpers.core.hookenv as ch_hookenv  # noqa
 
 charms_openstack.charm.use_defaults('charm.default-select-release')
 
