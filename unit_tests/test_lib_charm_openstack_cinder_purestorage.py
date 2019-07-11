@@ -46,4 +46,7 @@ class TestCinderpurestorageCharm(test_utils.PatchHelper):
         charm = self._patch_config_and_charm({'a': 'b'})
         config = charm.cinder_configuration()
         # Add check here that configuration is as expected.
-        # self.assertEqual(config, {})
+        self.assertEqual(config, [('san_ip', None),
+                                  ('pure_api_token', None),
+                                  ('volume_driver', None),
+                                  ('volume_backend_name', None)])
