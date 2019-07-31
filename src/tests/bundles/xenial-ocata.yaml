@@ -40,12 +40,10 @@ applications:
     - '2'
   cinder-purestorage:
     series: xenial
-    charm: cinder-purestorage
+    charm: ../../../cinder-purestorage
     options:
 # Add config options here
       driver-source: ppa:narindergupta/purestorage
-      san-ip: 10.243.19.250
-      pure-api-token: ac0a534f-b682-777a-45a4-15a02e0d5c7e
       protocol: iscsi
       volume-backend-name: cinder-pure
   rabbitmq-server:

@@ -20,8 +20,8 @@ import logging
 import uuid
 
 import zaza.model
-import zaza.charm_tests.test_utils as test_utils
-import zaza.utilities.openstack as openstack_utils
+import zaza.openstack.charm_tests.test_utils as test_utils
+import zaza.openstack.utilities.openstack as openstack_utils
 
 
 class CinderpurestorageTest(test_utils.OpenStackBaseTest):
@@ -35,29 +35,6 @@ class CinderpurestorageTest(test_utils.OpenStackBaseTest):
         cls.model_name = zaza.model.get_juju_model()
         cls.cinder_client = openstack_utils.get_cinder_session_client(
             cls.keystone_session)
-
-    def test_cinder_config(self):
-        logging.info('purestorage')
-        expected_contents = {
-            'cinder-purestorage': {
-                'san_ip': ['10.243.19.250'],
-                'pure_api_token': ['ac0a534f-b682-777a-45a4-15a02e0d5c7e'],
-                'volume_driver':
-                    ['cinder.volume.drivers.pure.PureISCSIDriver'],
-                'volume_backend_name': ['cinder-pure']
-            }
-        }
-
-        zaza.model.run_on_leader(
-            'cinder',
-            'sudo cp /etc/cinder/cinder.conf /tmp/',
-            model_name=self.model_name)
-        zaza.model.block_until_oslo_config_entries_match(
-            'cinder',
-            '/tmp/cinder.conf',
-            expected_contents,
-            model_name=self.model_name,
-            timeout=2)
 
     def test_create_volume(self):
         test_vol_name = "zaza{}".format(uuid.uuid1().fields[0])
