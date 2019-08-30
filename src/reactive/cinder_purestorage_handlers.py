@@ -16,8 +16,10 @@ import charms_openstack.charm
 import charms.reactive
 
 # This charm's library contains all of the handler code associated with
-# this charm -- we need to import it to get the definitions for the charm.
-import charm.openstack.cinder_purestorage
+# this charm -- we will use the auto-discovery feature of charms.openstack
+# to get the definitions for the charm.
+import charms_openstack.bus
+charms_openstack.bus.discover()
 
 charms_openstack.charm.use_defaults(
     'charm.installed',
@@ -29,5 +31,5 @@ charms_openstack.charm.use_defaults(
 
 @charms.reactive.when('config.changed.driver-source')
 def reinstall():
-    with charms_openstack.charm.provide_charm_instance() as charm:
-        charm.install()
+    with charms_openstack.charm.provide_charm_instance() as purestorage:
+        purestorage.install()
