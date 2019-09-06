@@ -16,7 +16,6 @@
 
 """Encapsulate cinder-purestorage testing."""
 
-import logging
 import uuid
 
 import zaza.model
