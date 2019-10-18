@@ -1,0 +1,53 @@
+series: bionic
+comment:
+- 'machines section to decide order of deployment. database sooner = faster'
+machines:
+  '0':
+    constraints: mem=3072M
+  '1':
+  '2':
+  '3':
+relations:
+- - keystone:shared-db
+  - mysql:shared-db
+- - cinder:shared-db
+  - mysql:shared-db
+- - cinder:identity-service
+  - keystone:identity-service
+- - cinder:amqp
+  - rabbitmq-server:amqp
+- - cinder:storage-backend
+  - cinder-purestorage:storage-backend
+applications:
+  mysql:
+    charm: cs:~openstack-charmers-next/percona-cluster
+    num_units: 1
+    to:
+    - '0'
+  keystone:
+    charm: cs:~openstack-charmers-next/keystone
+    num_units: 1
+    options:
+      openstack-origin: cloud:bionic-rocky
+    to:
+    - '1'
+  cinder:
+    charm: cs:~openstack-charmers-next/cinder
+    num_units: 1
+    options:
+      openstack-origin: cloud:bionic-rocky
+    to:
+    - '2'
+  cinder-purestorage:
+    series: bionic
+    charm: ../../../cinder-purestorage
+    options:
+# Add config options here
+      driver-source: ppa:openstack-charmers/purestorage-stable
+      protocol: iscsi
+      volume-backend-name: cinder-pure
+  rabbitmq-server:
+    charm: cs:~openstack-charmers-next/rabbitmq-server
+    num_units: 1
+    to:
+    - '3'
