@@ -36,6 +36,7 @@ class CinderpurestorageTest(test_utils.OpenStackBaseTest):
             cls.keystone_session)
 
     def test_create_volume(self):
+        zaza.model.block_until_all_units_idle()
         test_vol_name = "zaza{}".format(uuid.uuid1().fields[0])
         vol_new = self.cinder_client.volumes.create(
             name=test_vol_name,

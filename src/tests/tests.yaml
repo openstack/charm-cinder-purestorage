@@ -6,6 +6,11 @@ configure:
 gate_bundles:
   - disco-stein
   - bionic-queens
+  - bionic-rocky
+  - bionic-stein
+  - bionic-train
   - xenial-ocata
+  - xenial-pike
+  - xenial-queens
 smoke_bundles:
   - xenial-ocata
