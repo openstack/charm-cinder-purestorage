@@ -4,7 +4,6 @@ tests:
 configure:
   - zaza.openstack.charm_tests.keystone.setup.add_demo_user
 gate_bundles:
-  - disco-stein
   - bionic-queens
   - bionic-rocky
   - bionic-stein
