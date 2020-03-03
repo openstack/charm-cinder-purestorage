@@ -10,6 +10,7 @@ class CinderpurestorageCharm(
     version_package = 'python-purestorage'
     release = 'ocata'
     packages = [version_package]
+    release_pkg = 'cinder-common'
     stateless = True
     # Specify any config that the user *must* set.
     mandatory_config = [
