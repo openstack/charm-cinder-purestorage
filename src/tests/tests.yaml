@@ -15,3 +15,9 @@ gate_bundles:
   - xenial-queens
 smoke_bundles:
   - xenial-ocata
+dev_bundles:
+  - groovy-victoria
+  - focal-victoria
+tests_options:
+  force_deploy:
+    - groovy-victoria
