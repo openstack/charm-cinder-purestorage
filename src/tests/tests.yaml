@@ -4,6 +4,7 @@ tests:
 configure:
   - zaza.openstack.charm_tests.keystone.setup.add_demo_user
 gate_bundles:
+  - focal-victoria
   - focal-ussuri
   - bionic-ussuri
   - bionic-queens
@@ -17,7 +18,6 @@ smoke_bundles:
   - xenial-ocata
 dev_bundles:
   - groovy-victoria
-  - focal-victoria
 tests_options:
   force_deploy:
     - groovy-victoria
