@@ -9,14 +9,15 @@ gate_bundles:
   - focal-ussuri
   - bionic-ussuri
   - bionic-queens
-  - bionic-rocky
   - bionic-stein
   - bionic-train
+smoke_bundles:
+  - focal-ussuri
+dev_bundles:
   - xenial-ocata
   - xenial-pike
   - xenial-queens
-smoke_bundles:
-  - xenial-ocata
+  - bionic-rocky
 tests_options:
   force_deploy:
     - groovy-victoria
