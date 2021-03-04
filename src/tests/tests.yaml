@@ -5,6 +5,7 @@ configure:
   - zaza.openstack.charm_tests.keystone.setup.add_demo_user
 gate_bundles:
   - groovy-victoria
+  - focal-wallaby
   - focal-victoria
   - focal-ussuri
   - bionic-ussuri
@@ -18,6 +19,7 @@ dev_bundles:
   - xenial-pike
   - xenial-queens
   - bionic-rocky
+  - hirsute-wallaby
 tests_options:
   force_deploy:
-    - groovy-victoria
+    - hirsute-wallaby
