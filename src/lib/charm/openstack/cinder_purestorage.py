@@ -37,3 +37,4 @@ class CinderpurestorageCharmRocky(CinderpurestorageCharm):
     release = 'rocky'
     version_package = 'python3-purestorage'
     packages = [version_package]
+    purge_packages = ['python-purestorage']
