@@ -45,5 +45,10 @@ class TestCinderpurestorageCharm(test_utils.PatchHelper):
         # Add check here that configuration is as expected.
         self.assertEqual(config, [('san_ip', None),
                                   ('pure_api_token', None),
+                                  ('use_multipath_for_image_xfer', None),
+                                  ('image_volume_cache_enabled', None),
+                                  ('pure_eradicate_on_delete', None),
+                                  ('pure_automatic_max_oversubscription_ratio',
+                                      None),
                                   ('volume_driver', None),
                                   ('volume_backend_name', None)])

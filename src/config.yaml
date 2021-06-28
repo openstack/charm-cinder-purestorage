@@ -51,3 +51,120 @@ options:
     type: string
     description: Service name to present to Cinder
     default: !!null ""
+  eradicate-on-delete:
+    type: boolean
+    description: |
+      When enabled, all Pure volumes, snapshots, and protection groups will
+      be eradicated at the time of deletion in Cinder. Data will NOT be
+      recoverable after a delete with this set to True! When disabled, volumes
+      and snapshots will go into pending eradication state and can be recovered.
+    default: !!bool false
+  automatic-max-oversubscription:
+    type: boolean
+    description: |
+     Automatically determine an oversubscription ratio based on the current total
+     data reduction values. If used this calculated value will override the
+     max_over_subscription_ratio config option.
+    default: !!bool true
+  use-multipath:
+    type: boolean
+    description: |
+     Determine if we attach/detach volumes in cinder using multipath for volume to
+     image and image to volume transfer
+    default: !!bool true
+  use-replication:
+    type: boolean
+    description: When set this will enable Cinder Replication v2.
+    default: !!bool false
+  replication-target-name:
+    type: string
+    description: |
+     The name of the backend array to which replication should be performed.
+    default: !!null ""
+  replication-target-address:
+    type: string
+    description: |
+     The IP address, or FQDN, of the replication target array
+    default: !!null ""
+  replication-target-api-token:
+    type: string
+    description: |
+     The API token for the replication target array
+    default: !!null ""
+  replication-type:
+    type: string
+    description: |
+     The replication to be used. Options are async and sync. If not specified
+     the default is async.
+    default: !!null ""
+  replication-sync-uniform:
+    type: boolean
+    description: |
+     If the replication-type is set as sync, this defines that data paths are
+     uniform between arrays in the cluster and data connections should be
+     made to both when attaching. If not specified, defaults to False
+    default: !!null ""
+  replica-interval:
+    type: int
+    description: |
+     Snapshot replication interval in seconds. If not specified, defaults to 3600.
+    default: !!null ""
+  replica-retention-short:
+    type: int
+    description: |
+     Retain all snapshots on target for this time (in seconds). If not specified,
+     defaults to 14400
+    default: !!null ""
+  replica-retention-per-day:
+    type: int
+    description: |
+     Retain how many snapshots for each day. If not specified, defaults to 3.
+    default: !!null ""
+  replica-retention-long:
+    type: int
+    description: |
+     Retain snapshots per day on target for this time (in days). If not specified,
+     defaults to 7.
+    default: !!null ""
+  use-image-cache:
+    type: boolean
+    description: |
+     If set to True the Glance Image Cache for Cinder will be enabled on the backend.
+    default: !!bool false
+  image-volume-cache-max-size-gb:
+    type: int
+    description: |
+     If use-image-cache is true this sets the maximum size of the cache. If not set
+     this default to unlimited.
+    default: !!null ""
+  image-volume-cache-max-count:
+    type: int
+    description: |
+     If use-image-cache is true this sets the maximum number of cache entries.
+     If not set this default to unlimited.
+    default: !!null ""
+  replication-pgname:
+    type: string
+    description: |
+     Pure Protection Group name to use for async replication (will be created if it
+     does not exist). If not specified, defaults to cinder-group. Available from Stein.
+    default: !!null ""
+  replication-pod:
+    type: string
+    description: |
+     Pure Pod name to use for sync replication (will be created if it
+     does not exist). If not specified, defaults to cinder-pod. Available from Stein.
+    default: !!null ""
+  iscsi-cidr:
+    type: string
+    description: |
+     If protocol is iscsi, this parameter provides the CIDR of FlashArray iSCSI
+     targets hosts are allowed to connect to. If not specified, defaults to all
+     IPv4 address. Available from Train.
+    default: !!null ""
+  use-chap:
+    type: boolean
+    description: |
+     If protocol is iscsi, this parameter defines whether to use CHAP
+     authentication for Cinder created hosts.
+    default: !!bool false
