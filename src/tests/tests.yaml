@@ -1,6 +1,8 @@
 charm_name: cinder-purestorage
 tests:
-  - zaza.charm_tests.noop.tests.NoopTest
+  # NOTE(lourot): this test class is implemented in the current repository
+  # instead of zaza-openstack-tests:
+  - tests.tests_cinder_purestorage.CinderpurestorageTest
 configure:
   - zaza.openstack.charm_tests.keystone.setup.add_demo_user
 gate_bundles:
