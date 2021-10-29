@@ -1,21 +1,13 @@
 - project:
     templates:
-      - charm-unit-jobs
-    check:
-      jobs:
-      - impish-xena:
-          voting: false
-      - hirsute-wallaby
-      - groovy-victoria
-      - focal-xena:
-          voting: false
-      - focal-wallaby
-      - focal-victoria
-      - focal-ussuri
-      - bionic-ussuri
-      - bionic-queens
-      - bionic-stein
-      - bionic-train
+      - charm-yoga-unit-jobs
+      - charm-yoga-functional-jobs
+      - charm-xena-functional-jobs
+      - charm-wallaby-functional-jobs
+      - charm-victoria-functional-jobs
+      - charm-ussuri-functional-jobs
+      - charm-stein-functional-jobs
+      - charm-queens-functional-jobs
     vars:
       needs_charm_build: true
       charm_build_name: cinder-purestorage

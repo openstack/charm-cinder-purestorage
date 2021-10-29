@@ -1,7 +1,7 @@
 variables:
-  openstack-origin: &openstack-origin distro
+  openstack-origin: &openstack-origin cloud:focal-yoga
 
-series: groovy
+series: focal
 
 comment:
 - 'machines section to decide order of deployment. database sooner = faster'
@@ -66,7 +66,7 @@ applications:
     to:
     - '4'
   cinder-purestorage:
-    series: groovy
+    series: focal
     charm: ../../../cinder-purestorage
     options:
 # Add config options here
