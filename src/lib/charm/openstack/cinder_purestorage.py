@@ -48,11 +48,14 @@ class CinderpurestorageCharm(
                              self.config.get('use-chap'))])
 
         if self.config.get('use-image-cache'):
-            image_cache = [
-                ('image_volume_cache_max_size_gb',
-                    self.config.get('image-volume-cache-max-size-gb', 0)),
-                ('image_volume_cache_max_count',
-                    self.config.get('image-volume-cache-max-count', 0))]
+            max_size_gb = self.config.get('image-volume-cache-max-size-gb')
+            if max_size_gb is not None:
+                image_cache.append(('image_volume_cache_max_size_gb',
+                                   max_size_gb))
+
+            max_count = self.config.get('image-volume-cache-max-count')
+            if max_count is not None:
+                image_cache.append(('image_volume_cache_max_count', max_count))
 
         if self.config.get('use-replication'):
             replication_device = 'backend_id:' + \
