@@ -50,3 +50,15 @@ class CinderpurestorageTest(test_utils.OpenStackBaseTest):
             getattr(test_vol, 'os-vol-host-attr:host').split('#')[0],
             'cinder@cinder-purestorage')
         self.cinder_client.volumes.delete(vol_new)
+
+    # Check to see if allowed_direct_url_schemes gets propagated to
+    # /etc/cinder/cinder.conf
+    def test_config_propagation(self):
+        expected_contents = {
+            'cinder-purestorage': {
+                'allowed_direct_url_schemes': ['cinder']}}
+        zaza.model.block_until_oslo_config_entries_match(
+            'cinder',
+            '/etc/cinder/cinder.conf',
+            expected_contents,
+            model_name=self.model_name)

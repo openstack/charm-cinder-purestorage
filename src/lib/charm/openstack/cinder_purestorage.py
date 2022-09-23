@@ -37,7 +37,8 @@ class CinderpurestorageCharm(
             ('pure_automatic_max_oversubscription_ratio',
                 self.config.get('automatic-max-oversubscription')),
             ('volume_driver', volumedriver),
-            ('volume_backend_name', service)]
+            ('volume_backend_name', service),
+            ('allowed_direct_url_schemes', 'cinder')]
 
         if self.config.get('protocol') == 'iscsi':
             if self.config.get('iscsi-cidr'):

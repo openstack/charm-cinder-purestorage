@@ -51,4 +51,5 @@ class TestCinderpurestorageCharm(test_utils.PatchHelper):
                                   ('pure_automatic_max_oversubscription_ratio',
                                       None),
                                   ('volume_driver', None),
-                                  ('volume_backend_name', None)])
+                                  ('volume_backend_name', None),
+                                  ('allowed_direct_url_schemes', 'cinder')])
