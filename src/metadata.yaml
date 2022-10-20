@@ -11,8 +11,8 @@ tags:
 - file-servers
 - misc
 series:
-- jammy
-- kinetic
+- bionic
+- focal
 subordinate: true
 provides:
   storage-backend:

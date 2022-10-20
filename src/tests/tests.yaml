@@ -5,13 +5,9 @@ tests:
   - tests.tests_cinder_purestorage.CinderpurestorageTest
 configure:
   - zaza.openstack.charm_tests.keystone.setup.add_demo_user
-gate_bundles:
-  - focal-xena
 smoke_bundles:
-  - focal-xena
-dev_bundles:
-  - focal-yoga
-  - jammy-yoga
-tests_options:
-  force_deploy:
-    - jammy-yoga
+- focal-ussuri
+gate_bundles:
+- focal-ussuri
+- bionic-ussuri
+- bionic-train
