@@ -1,7 +1,10 @@
 - project:
     templates:
-      - charm-unit-jobs-py310
-      - charm-zed-functional-jobs
+      - charm-unit-jobs-py38
+    check:
+      jobs:
+        - focal-xena
+        - focal-wallaby
     vars:
       needs_charm_build: true
       charm_build_name: cinder-purestorage
