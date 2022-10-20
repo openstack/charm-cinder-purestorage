@@ -6,12 +6,7 @@ tests:
 configure:
   - zaza.openstack.charm_tests.keystone.setup.add_demo_user
 gate_bundles:
-  - focal-xena
+  - focal-ussuri
+  - focal-victoria
 smoke_bundles:
-  - focal-xena
-dev_bundles:
-  - focal-yoga
-  - jammy-yoga
-tests_options:
-  force_deploy:
-    - jammy-yoga
+  - focal-victoria
