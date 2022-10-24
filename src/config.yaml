@@ -46,7 +46,9 @@ options:
   protocol:
     type: string
     default: iscsi
-    description: SAN protocol to use. Choose between iscsi or fc.
+    description: |
+      SAN protocol to use. Choose between iscsi, fc or nvme-roce.
+      nvme-roce is available from Zed.
   volume-backend-name:
     type: string
     description: Service name to present to Cinder
@@ -161,6 +163,13 @@ options:
      If protocol is iscsi, this parameter provides the CIDR of FlashArray iSCSI
      targets hosts are allowed to connect to. If not specified, defaults to all
      IPv4 address. Available from Train.
+    default: !!null ""
+  nvme-cidr:
+    type: string
+    description: |
+     If protocol is nvme-roce, this parameter provides the CIDR of FlashArray
+     NVMe-RoCE targets hosts are allowed to connect to. If not specified, defaults
+     to all IPv4 address. Available from Zed.
     default: !!null ""
   use-chap:
     type: boolean

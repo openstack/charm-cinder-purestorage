@@ -20,11 +20,13 @@ class CinderpurestorageCharm(
         drivers = {
             'iscsi': 'cinder.volume.drivers.pure.PureISCSIDriver',
             'fc': 'cinder.volume.drivers.pure.PureFCDriver',
+            'nvme-roce': 'cinder.volume.drivers.pure.PureNVMEDriver',
         }
         service = self.config.get('volume-backend-name')
         volumedriver = drivers.get(self.config.get('protocol'))
         image_cache = []
         iscsi = []
+        nvme_roce = []
         repl = []
         driver_options = [
             ('san_ip', self.config.get('san-ip')),
@@ -39,6 +41,11 @@ class CinderpurestorageCharm(
             ('volume_driver', volumedriver),
             ('volume_backend_name', service),
             ('allowed_direct_url_schemes', 'cinder')]
+
+        if self.config.get('protocol') == 'nvme-roce':
+            if self.config.get('nvme-cidr'):
+                nvme_roce.extend([('pure_nvme_cidr',
+                                 self.config.get('nvme-cidr'))])
 
         if self.config.get('protocol') == 'iscsi':
             if self.config.get('iscsi-cidr'):
@@ -92,7 +99,7 @@ class CinderpurestorageCharm(
                 repl.extend([('pure_replication_pod_name',
                             self.config.get('replication-pod'))])
 
-        final_options = driver_options + image_cache + repl + iscsi
+        final_options = driver_options + image_cache + repl + iscsi + nvme_roce
         return final_options
 
 
