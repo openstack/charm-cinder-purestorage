@@ -21,16 +21,16 @@
       "item": "layer:openstack",
       "url": "https://github.com/openstack/charm-layer-openstack",
       "vcs": null,
-      "branch": "f9a11fde2e136fc45ee619f3e94eb93fcffb117d",
-      "commit": "f9a11fde2e136fc45ee619f3e94eb93fcffb117d"
+      "branch": "8b31ef19e40b1cff2960434ef940867d85ea56be",
+      "commit": "8b31ef19e40b1cff2960434ef940867d85ea56be"
     },
     {
       "type": "layer",
       "item": "cinder-purestorage",
       "url": null,
       "vcs": null,
-      "branch": "ee5c5d92d8ecd9f179aa029c3234e300a2c8e2e7",
-      "commit": "ee5c5d92d8ecd9f179aa029c3234e300a2c8e2e7"
+      "branch": "206892c329dfb370f5124024470f3f74598389a3",
+      "commit": "206892c329dfb370f5124024470f3f74598389a3"
     },
     {
       "type": "layer",
@@ -50,47 +50,15 @@
     },
     {
       "type": "python_module",
-      "package": "charms.openstack",
-      "url": "git+https://github.com/openstack/charms.openstack.git",
-      "branch": "stable/zed",
-      "version": "bf2e867e9e18c28b0e1ba813440ec771b520b2aa",
-      "vcs": "git"
+      "package": "tomli",
+      "vcs": null,
+      "version": "2.0.1"
     },
     {
       "type": "python_module",
-      "package": "pyaml",
+      "package": "pbr",
       "vcs": null,
-      "version": "21.10.1"
-    },
-    {
-      "type": "python_module",
-      "package": "flit_core",
-      "vcs": null,
-      "version": "3.7.1"
-    },
-    {
-      "type": "python_module",
-      "package": "pip",
-      "vcs": null,
-      "version": "22.0.4"
-    },
-    {
-      "type": "python_module",
-      "package": "wheel",
-      "vcs": null,
-      "version": "0.37.1"
-    },
-    {
-      "type": "python_module",
-      "package": "setuptools",
-      "vcs": null,
-      "version": "62.1.0"
-    },
-    {
-      "type": "python_module",
-      "package": "setuptools_scm",
-      "vcs": null,
-      "version": "6.4.2"
+      "version": "5.11.0"
     },
     {
       "type": "python_module",
@@ -106,27 +74,15 @@
     },
     {
       "type": "python_module",
+      "package": "pip",
+      "vcs": null,
+      "version": "22.0.4"
+    },
+    {
+      "type": "python_module",
       "package": "packaging",
       "vcs": null,
       "version": "21.3"
-    },
-    {
-      "type": "python_module",
-      "package": "MarkupSafe",
-      "vcs": null,
-      "version": "2.1.1"
-    },
-    {
-      "type": "python_module",
-      "package": "charms.reactive",
-      "vcs": null,
-      "version": "1.5.1"
-    },
-    {
-      "type": "python_module",
-      "package": "tomli",
-      "vcs": null,
-      "version": "2.0.1"
     },
     {
       "type": "python_module",
@@ -136,9 +92,17 @@
     },
     {
       "type": "python_module",
-      "package": "PyYAML",
+      "package": "charmhelpers",
+      "url": "git+https://github.com/juju/charm-helpers.git",
+      "branch": "stable/zed",
+      "version": "be9f3f6252e2fdd1664861a44636442d770d65ea",
+      "vcs": "git"
+    },
+    {
+      "type": "python_module",
+      "package": "psutil",
       "vcs": null,
-      "version": "5.3.1"
+      "version": "5.9.4"
     },
     {
       "type": "python_module",
@@ -148,29 +112,71 @@
     },
     {
       "type": "python_module",
-      "package": "psutil",
+      "package": "charms.reactive",
       "vcs": null,
-      "version": "5.9.2"
+      "version": "1.5.1"
     },
     {
       "type": "python_module",
-      "package": "charmhelpers",
-      "url": "git+https://github.com/juju/charm-helpers.git",
+      "package": "poetry-core",
+      "vcs": null,
+      "version": "1.3.2"
+    },
+    {
+      "type": "python_module",
+      "package": "PyYAML",
+      "vcs": null,
+      "version": "5.3.1"
+    },
+    {
+      "type": "python_module",
+      "package": "charms.openstack",
+      "url": "git+https://github.com/openstack/charms.openstack.git",
       "branch": "stable/zed",
-      "version": "4f884fa39609e55a04348a44baa6b0ac3336bd08",
+      "version": "bf2e867e9e18c28b0e1ba813440ec771b520b2aa",
       "vcs": "git"
+    },
+    {
+      "type": "python_module",
+      "package": "wheel",
+      "vcs": null,
+      "version": "0.38.3"
+    },
+    {
+      "type": "python_module",
+      "package": "flit_core",
+      "vcs": null,
+      "version": "3.8.0"
+    },
+    {
+      "type": "python_module",
+      "package": "MarkupSafe",
+      "vcs": null,
+      "version": "2.1.1"
+    },
+    {
+      "type": "python_module",
+      "package": "setuptools_scm",
+      "vcs": null,
+      "version": "6.4.2"
+    },
+    {
+      "type": "python_module",
+      "package": "setuptools",
+      "vcs": null,
+      "version": "62.1.0"
+    },
+    {
+      "type": "python_module",
+      "package": "pyaml",
+      "vcs": null,
+      "version": "21.10.1"
     },
     {
       "type": "python_module",
       "package": "pyparsing",
       "vcs": null,
       "version": "3.0.9"
-    },
-    {
-      "type": "python_module",
-      "package": "pbr",
-      "vcs": null,
-      "version": "5.10.0"
     }
   ]
 }
