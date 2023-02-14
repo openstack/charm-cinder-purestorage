@@ -1,5 +1,5 @@
 variables:
-  openstack-origin: &openstack-origin distro
+  openstack-origin: &openstack-origin cloud:jammy-antelope
 
 local_overlay_enabled: False
 
@@ -73,7 +73,7 @@ applications:
     - '4'
     channel: latest/edge
   cinder-purestorage:
-    charm: ../../../cinder-purestorage_ubuntu-22.04-amd64_ubuntu-22.10-amd64.charm
+    charm: ../../../cinder-purestorage_ubuntu-22.04-amd64_ubuntu-22.10-amd64_ubuntu-23.04-amd64.charm
     options:
 # Add config options here
       driver-source: ppa:openstack-charmers/purestorage-stable
