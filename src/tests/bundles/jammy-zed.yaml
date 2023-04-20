@@ -41,21 +41,21 @@ relations:
 applications:
   keystone-mysql-router:
     charm: ch:mysql-router
-    channel: latest/edge
+    channel: 8.0/edge
   cinder-mysql-router:
     charm: ch:mysql-router
-    channel: latest/edge
+    channel: 8.0/edge
 
   mysql-innodb-cluster:
     charm: ch:mysql-innodb-cluster
     num_units: 3
     options:
-      source: *openstack-origin
+      source: distro
     to:
       - '0'
       - '1'
       - '2'
-    channel: latest/edge
+    channel: 8.0/edge
   keystone:
     charm: ch:keystone
     num_units: 1
@@ -63,7 +63,7 @@ applications:
       openstack-origin: *openstack-origin
     to:
     - '3'
-    channel: latest/edge
+    channel: 2023.1/edge
   cinder:
     charm: ch:cinder
     num_units: 1
@@ -71,7 +71,7 @@ applications:
       openstack-origin: *openstack-origin
     to:
     - '4'
-    channel: latest/edge
+    channel: 2023.1/edge
   cinder-purestorage:
     charm: ../../../cinder-purestorage_ubuntu-22.04-amd64_ubuntu-22.10-amd64_ubuntu-23.04-amd64.charm
     options:
@@ -84,4 +84,4 @@ applications:
     num_units: 1
     to:
     - '5'
-    channel: latest/edge
+    channel: 3.9/edge
