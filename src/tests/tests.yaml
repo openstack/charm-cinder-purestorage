@@ -12,6 +12,8 @@ smoke_bundles:
 dev_bundles:
   - focal-yoga
   - jammy-yoga
+  - jammy-bobcat
+  - mantic-bobcat
 tests_options:
   force_deploy:
     - jammy-yoga
