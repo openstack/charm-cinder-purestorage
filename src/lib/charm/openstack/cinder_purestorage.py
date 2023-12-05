@@ -101,5 +101,7 @@ class CinderpurestorageCharmRocky(CinderpurestorageCharm):
     # Rocky needs py3 packages.
     release = 'rocky'
     version_package = 'python3-purestorage'
-    packages = [version_package]
+    # make sure sysfsutils (for systool) is available as it's necessary
+    # for the FC scenario up to Yoga, LP: #1947063
+    packages = [version_package, 'sysfsutils']
     purge_packages = ['python-purestorage']
