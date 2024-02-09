@@ -6,14 +6,13 @@ tests:
 configure:
   - zaza.openstack.charm_tests.keystone.setup.add_demo_user
 gate_bundles:
-  - focal-xena
-smoke_bundles:
-  - focal-xena
-dev_bundles:
-  - focal-yoga
-  - jammy-yoga
+  - jammy-antelope
   - jammy-bobcat
-  - mantic-bobcat
+  - jammy-caracal
+smoke_bundles:
+  - jammy-caracal
+dev_bundles:
+  - noble-caracal
 tests_options:
   force_deploy:
-    - jammy-yoga
+    - noble-caracal
