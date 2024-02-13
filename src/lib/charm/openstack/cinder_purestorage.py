@@ -3,8 +3,7 @@ import charms_openstack.charm
 charms_openstack.charm.use_defaults('charm.default-select-release')
 
 
-class CinderpurestorageCharm(
-        charms_openstack.charm.CinderStoragePluginCharm):
+class CinderpurestorageCharm(charms_openstack.charm.CinderStoragePluginCharm):
 
     name = 'cinder_purestorage'
     version_package = 'python-purestorage'
@@ -21,19 +20,20 @@ class CinderpurestorageCharm(
             'iscsi': 'cinder.volume.drivers.pure.PureISCSIDriver',
             'fc': 'cinder.volume.drivers.pure.PureFCDriver',
             'nvme-roce': 'cinder.volume.drivers.pure.PureNVMEDriver',
+            'nvme-tcp': 'cinder.volume.drivers.pure.PureNVMEDriver',
         }
         service = self.config.get('volume-backend-name')
         volumedriver = drivers.get(self.config.get('protocol'))
         image_cache = []
         iscsi = []
         nvme_roce = []
+        nvme_tcp = []
         repl = []
         driver_options = [
             ('san_ip', self.config.get('san-ip')),
             ('pure_api_token', self.config.get('pure-api-token')),
             ('use_multipath_for_image_xfer', self.config.get('use-multipath')),
-            ('image_volume_cache_enabled',
-                self.config.get('use-image-cache')),
+            ('image_volume_cache_enabled', self.config.get('use-image-cache')),
             ('pure_eradicate_on_delete',
                 self.config.get('eradicate-on-delete')),
             ('pure_automatic_max_oversubscription_ratio',
@@ -47,10 +47,13 @@ class CinderpurestorageCharm(
             driver_options.append(
                 ('backend_availability_zone', backend_az))
 
-        if self.config.get('protocol') == 'nvme-roce':
+        if self.config.get('protocol') in ['nvme-roce', 'nvme-tcp']:
             if self.config.get('nvme-cidr'):
-                nvme_roce.extend([('pure_nvme_cidr',
-                                 self.config.get('nvme-cidr'))])
+                self.config.get('protocol').extend(
+                    [('pure_nvme_cidr', self.config.get('nvme-cidr'))])
+
+        if self.config.get('protocol') == 'nvme-tcp':
+            nvme_tcp.append(('pure_nvme_transport', 'tcp'))
 
         if self.config.get('protocol') == 'iscsi':
             if self.config.get('iscsi-cidr'):
@@ -70,12 +73,20 @@ class CinderpurestorageCharm(
             if max_count is not None:
                 image_cache.append(('image_volume_cache_max_count', max_count))
 
-        if self.config.get('use-replication'):
+        if self.config.get("use-replication"):
             replication_device = 'backend_id:' + \
                 self.config.get('replication-target-name') + \
                 ',san_ip:' + \
                 self.config.get('replication-target-address') + \
                 ',api_token:' + \
+                self.config.get('replication-target-api-token')
+            if self.config.get('replication-type') == 'sync':
+                replication_device += ',type:sync'
+                if self.config.get('replication-sync-uniform', False):
+                    replication_device += ',uniform:true'
+            repl = [('replication_device',
+                    replication_device)]
+            if self.config.get('replica-interval'):
                 self.config.get('replication-target-api-token')
             if self.config.get('replication-type') == 'sync':
                 replication_device += ',type:sync'
@@ -104,7 +115,9 @@ class CinderpurestorageCharm(
                 repl.extend([('pure_replication_pod_name',
                             self.config.get('replication-pod'))])
 
-        final_options = driver_options + image_cache + repl + iscsi + nvme_roce
+        final_options = (
+            driver_options + image_cache + repl + iscsi + nvme_roce + nvme_tcp
+        )
         return final_options
 
 
