@@ -42,6 +42,11 @@ class CinderpurestorageCharm(
             ('volume_backend_name', service),
             ('allowed_direct_url_schemes', 'cinder')]
 
+        backend_az = self.config.get('backend-availability-zone')
+        if backend_az:
+            driver_options.append(
+                ('backend_availability_zone', backend_az))
+
         if self.config.get('protocol') == 'nvme-roce':
             if self.config.get('nvme-cidr'):
                 nvme_roce.extend([('pure_nvme_cidr',
