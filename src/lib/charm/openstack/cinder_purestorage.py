@@ -40,6 +40,11 @@ class CinderpurestorageCharm(
             ('volume_backend_name', service),
             ('allowed_direct_url_schemes', 'cinder')]
 
+        backend_az = self.config.get('backend-availability-zone')
+        if backend_az:
+            driver_options.append(
+                ('backend_availability_zone', backend_az))
+
         if self.config.get('protocol') == 'iscsi':
             if self.config.get('iscsi-cidr'):
                 iscsi.extend([('pure_iscsi_cidr',
