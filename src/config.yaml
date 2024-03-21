@@ -1,4 +1,10 @@
 options:
+  backend-availability-zone:
+    default:
+    type: string
+    description: |
+      Availability zone name of this volume backend. If set, it will
+      override the default availability zone.
   driver-source:
     type: string
     default:
