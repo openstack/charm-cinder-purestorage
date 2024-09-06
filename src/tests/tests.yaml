@@ -6,11 +6,9 @@ tests:
 configure:
   - zaza.openstack.charm_tests.keystone.setup.add_demo_user
 gate_bundles:
-  - jammy-antelope
-  - jammy-bobcat
-  - jammy-caracal
+  - noble-caracal
 smoke_bundles:
-  - jammy-caracal
+  - noble-caracal
 dev_bundles:
   - noble-caracal
 tests_options:

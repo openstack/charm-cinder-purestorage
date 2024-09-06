@@ -63,7 +63,7 @@ applications:
       openstack-origin: *openstack-origin
     to:
     - '3'
-    channel: 2024.1/edge
+    channel: latest/edge
   cinder:
     charm: ch:cinder
     num_units: 1
@@ -71,9 +71,9 @@ applications:
       openstack-origin: *openstack-origin
     to:
     - '4'
-    channel: 2024.1/edge
+    channel: latest/edge
   cinder-purestorage:
-    charm: ../../../cinder-purestorage_ubuntu-22.04-amd64.charm
+    charm: ../../../cinder-purestorage.charm
     options:
 # Add config options here
       driver-source: ppa:openstack-charmers/purestorage-stable
