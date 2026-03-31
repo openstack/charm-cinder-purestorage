@@ -6,12 +6,13 @@ description: |
   .
   This charm provides a purestorage backend for Cinder
 tags:
-  - openstack
-  - storage
-  - file-servers
-  - misc
+- openstack
+- storage
+- file-servers
+- misc
 series:
-  - jammy
+- jammy
+- noble
 subordinate: true
 provides:
   storage-backend:
